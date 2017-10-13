@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using finaltest.Models;
+using System.Web.Security;
 
 namespace finaltest.Controllers
 {
@@ -43,9 +44,29 @@ namespace finaltest.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(User userModel)
+        public ActionResult Login(User userModel,string returnUrl)
         {
-            return View();
+            DbModels dbModel = new DbModels();
+            var data = dbModel.Users.Where(x => x.Username == userModel.Username && x.Password == userModel.Password).First();
+            if (data != null)
+            {
+                FormsAuthentication.SetAuthCookie(data.Username, false);
+                if(Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/") && returnUrl.StartsWith("//") && returnUrl.StartsWith("/\\"))
+                {
+                    return Redirect(returnUrl);
+                }
+
+                else
+                {
+                    return RedirectToAction("Index","Home");
+                }
+            }
+
+            else
+            {
+                ModelState.AddModelError("","Invalid credentials");
+                return View();
+            }
         }
 
 
