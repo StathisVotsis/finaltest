@@ -69,6 +69,13 @@ namespace finaltest.Controllers
             }
         }
 
+        [Authorize]
+        public ActionResult SignOut()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login","User");
+        }
+
 
     }
 }
