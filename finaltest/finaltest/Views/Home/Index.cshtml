@@ -17,6 +17,22 @@
     {
        <h1>Welcome @(User.Identity.IsAuthenticated?HttpContext.Current.User.Identity.Name:"Guest")</h1>
        <a href="@Url.Action("Signout","User")">Logout</a>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-2">
+            <label class="label-danger">@ViewBag.PhotonMessage</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-2">
+            <label class="label-danger">@ViewBag.Photon2Message</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-2">
+            <label class="label-danger">@ViewBag.Photon3Message</label>
+        </div>
+    </div>
     }
     <div> 
     </div>
