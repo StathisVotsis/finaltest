@@ -13,11 +13,14 @@
     <title>Index</title>
 </head>
 <body>
-    @if(User.Identity.IsAuthenticated)
+   
+    
+    @if (User.Identity.IsAuthenticated)
     {
-       <h1>Welcome @(User.Identity.IsAuthenticated?HttpContext.Current.User.Identity.Name:"Guest")</h1>
-       <a href="@Url.Action("Signout","User")">Logout</a>
-
+       <h1>Welcome @(User.Identity.IsAuthenticated ? HttpContext.Current.User.Identity.Name : "Guest")</h1>
+       <a href="@Url.Action("Signout", "User")">Logout</a>
+   using (Html.BeginForm("Index", "Home", FormMethod.Post))
+   {
     <div class="form-group">
         <div class="col-md-offset-2 col-md-2">
             <label class="label-danger">@ViewBag.PhotonMessage</label>
@@ -33,8 +36,22 @@
             <label class="label-danger">@ViewBag.Photon3Message</label>
         </div>
     </div>
-    }
-    <div> 
-    </div>
+   <table>
+        <tr>
+        <td>
+            <input type="submit" value="Realy1-On" name="command" class="btn btn-default" />
+        </td>
+
+        <td>
+            <input type="submit" value="Relay1-Off" name="command" class="btn btn-default" />
+        </td>
+        </tr>
+    </table>
+       }
+   }
+   
+        <div>
+        </div>
+
 </body>
 </html>
