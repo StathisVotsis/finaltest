@@ -39,8 +39,7 @@ namespace finaltest.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Index(string txtId)
         {
-            if(txtId == "1")
-            {
+           
                 var success = await ParticleCloud.SharedCloud.LoginAsync("stathisvotsis@gmail.com", "eystbots");
                 List<ParticleDevice> devices = await ParticleCloud.SharedCloud.GetDevicesAsync();
                 foreach (ParticleDevice device in devices)
@@ -50,22 +49,7 @@ namespace finaltest.Controllers
                 }
                 ViewBag.PhotonMessage = "You device is" + " " + myDevice.Name.ToString();
                 var functionResponse = await myDevice.RunFunctionAsync("relayOn", "1");
-                var result = functionResponse.ReturnValue;
-            }
-            else if (txtId == "0")
-            {
-                var success = await ParticleCloud.SharedCloud.LoginAsync("stathisvotsis@gmail.com", "eystbots");
-                List<ParticleDevice> devices = await ParticleCloud.SharedCloud.GetDevicesAsync();
-                foreach (ParticleDevice device in devices)
-                {
-                    //MessageBox.Show(device.Name.ToString());
-                    myDevice = device;
-                }
-                ViewBag.PhotonMessage = "You device is" + " " + myDevice.Name.ToString();
-                var functionResponse = await myDevice.RunFunctionAsync("relayOff", "1");
-                var result = functionResponse.ReturnValue;
-            }
-              
+                var result = functionResponse.ReturnValue;           
                 return View();
         }
 
