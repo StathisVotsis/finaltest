@@ -48,7 +48,7 @@ namespace finaltest.Controllers
                     myDevice = device;
                 }
                 ViewBag.PhotonMessage = "You device is" + " " + myDevice.Name.ToString();
-                var functionResponse = await myDevice.RunFunctionAsync("relayOn", "1");
+                var functionResponse = await myDevice.RunFunctionAsync("relayOff", "1");
                 var result = functionResponse.ReturnValue;           
                 return View();
         }
